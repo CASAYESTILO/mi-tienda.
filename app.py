@@ -44,13 +44,13 @@ class Producto(db.Model):
 def load_user(user_id):
     return UsuarioAdmin.query.get(int(user_id))
 
-# RUTAS PÚBLICAS
+ RUTAS PÚBLICAS
 @app.route('/')
 def catalogo():
     lista_productos = Producto.query.all()
     return render_template('catalogo.html', productos=lista_productos)
 
-# RUTAS DE ADMINISTRACIÓN
+ RUTAS DE ADMINISTRACIÓN
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
