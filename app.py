@@ -3,7 +3,7 @@ from flask import Flask, render_template, redirect, url_for, request, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 
 # Configuraciones de seguridad para Render
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'tienda_secreta_123')
