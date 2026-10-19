@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Administración</title>
+    <link rel="stylesheet" href="https://jsdelivr.net">
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark mb-4">
+        <div class="container-fluid">
+            <span class="navbar-brand">Panel Administrador</span>
+            <div>
+                <a href="/" class="btn btn-sm btn-outline-light me-2">Ver Catálogo</a>
+                <a href="/logout" class="btn btn-sm btn-danger">Cerrar Sesión</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="row">
+            <!-- Formulario para agregar -->
+            <div class="col-md-4 mb-4">
+                <div class="card p-3 shadow-sm">
+                    <h4>Agregar Producto</h4>
+                    <form method="POST">
+                        <div class="mb-2">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" name="nombre" class="form-control" required>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Descripción</label>
+                            <textarea name="descripcion" class="form-control" rows="2"></textarea>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Precio</label>
+                            <input type="number" step="0.01" name="precio" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">URL de la Imagen (Foto)</label>
+                            <input type="url" name="imagen_url" class="form-control" placeholder="https://ejemplo.com" required>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">Guardar Producto</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Listado para gestionar/eliminar -->
+            <div class="col-md-8">
+                <h4>Productos en Existencia</h4>
+                <table class="table table-striped align-middle">
+                    <thead>
+                        <tr>
+                            <th>Foto</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for p in productos %}
+                        <tr>
+                            <td><img src="{{ p.imagen_url }}" style="width: 60px; height: 60px; object-fit: cover;" class="rounded"></td>
+                            <td><strong>{{ p.nombre }}</strong></td>
+                            <td>${{ p.precio }}</td>
+                            <td>
+                                <a href="/admin/eliminar/{{ p.id }}" class="btn btn-sm btn-danger" onclick="return confirm('¿Seguro de borrar este producto?')">Eliminar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
