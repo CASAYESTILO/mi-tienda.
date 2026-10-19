@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Catálogo de Productos</title>
+    <link rel="stylesheet" href="https://jsdelivr.net">
+</head>
+<body class="bg-light">
+    <div class="container my-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Catálogo de Productos</h1>
+            <a href="/login" class="btn btn-outline-secondary">Ingresar como Admin</a>
+        </div>
+        
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for p in productos %}
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <img src="{{ p.imagen_url }}" class="card-img-top" alt="{{ p.nombre }}" style="height: 250px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ p.nombre }}</h5>
+                        <p class="card-text text-muted">{{ p.descripcion }}</p>
+                        <h4 class="text-primary">${{ p.precio }}</h4>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <p class="text-center w-100">No hay productos disponibles por el momento.</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
