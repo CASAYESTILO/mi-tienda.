@@ -4,7 +4,7 @@ from flask import Flask, render_template, redirect, url_for, request, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
-Rutas absolutas a prueba de fallos para Render
+# Rutas absolutas a prueba de fallos para Render
 current_dir = os.path.dirname(os.path.abspath(file))
 template_dir = os.path.join(current_dir, 'templates')
 
