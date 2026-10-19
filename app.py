@@ -3,9 +3,14 @@ from flask import Flask, render_template, redirect, url_for, request, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
-base_dir = os.path.abspath(os.path.dirname(__file__))
-template_dir = os.path.join(base_dir, 'templates')
-app = Flask(__name__, template_folder=template_dir)
+import os
+
+# Buscamos la ruta real del directorio actual
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# Unimos la ruta con la carpeta templates de forma exacta
+template_dir = os.path.join(current_dir, 'templates')
+
+app = Flask(__name__, template_folder=template_dir, static_folder=os.path.join(current_dir, 'static'))
 
 # Configuraciones de seguridad para Render
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'tienda_secreta_123')
